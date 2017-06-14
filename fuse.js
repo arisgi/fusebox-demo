@@ -6,6 +6,6 @@ const fuse = FuseBox.init({
 });
 
 fuse.bundle('app')
-  .instructions('> index.js');
+  .instructions('> index.ts');
 
 fuse.run();
