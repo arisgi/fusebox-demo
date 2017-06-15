@@ -10,8 +10,11 @@ const fuse = FuseBox.init({
   ]
 });
 
+fuse.dev();
+
 fuse.bundle('app')
+  .instructions('> index.ts')
   .watch()
-  .instructions('> index.ts');
+  .hmr();
 
 fuse.run();
