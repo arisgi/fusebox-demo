@@ -12,8 +12,15 @@ const fuse = FuseBox.init({
 
 fuse.dev();
 
+/*
 fuse.bundle('app')
   .instructions('> index.ts')
+  .watch()
+  .hmr();
+*/
+
+fuse.bundle('app')
+  .instructions('> hoge.ts')
   .watch()
   .hmr();
 
@@ -27,4 +34,5 @@ Sparky.task('watch:images', () => {
 
 Sparky.task('default', ['clean', 'watch:images'], () => {
   fuse.run();
+  fuse.bundle('app').test('[**/**.test.ts]');
 });
