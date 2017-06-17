@@ -1,4 +1,4 @@
-const { FuseBox, CSSPlugin, SassPlugin, WebIndexPlugin } = require('fuse-box');
+const { FuseBox, CSSPlugin, SassPlugin, WebIndexPlugin, Sparky } = require('fuse-box');
 
 const fuse = FuseBox.init({
   homeDir: 'src',
@@ -17,4 +17,14 @@ fuse.bundle('app')
   .watch()
   .hmr();
 
-fuse.run();
+Sparky.task('clean', () => {
+  return Sparky.src('dist').clean('dist');
+});
+
+Sparky.task('watch:images', () => {
+  return Sparky.watch('**/*.+(svg|png|jpg|gif)', { base: './src' }).dest('./dist');
+});
+
+Sparky.task('default', ['clean', 'watch:images'], () => {
+  fuse.run();
+});
